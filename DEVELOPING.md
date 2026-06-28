@@ -66,3 +66,9 @@ selective syncing:
 ```bash
 git fetch upstream && git merge upstream/main
 ```
+
+All reference repos we build on (this one plus
+[beautiful-html-templates](https://github.com/zarazhangrui/beautiful-html-templates),
+the source of `bold-template-pack/`) are tracked in [REFERENCES.md](REFERENCES.md)
+— including the commit each was at on our last review, so re-checks only cover new
+changes. Update that file's dates/SHAs whenever you re-analyze an upstream.

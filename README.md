@@ -586,6 +586,13 @@ Uses [Playwright](https://playwright.dev) to screenshot each slide at 1920×1080
 - For URL deployment: Node.js + Vercel account (free)
 - For PDF export: Node.js (Playwright installs automatically)
 
+## Reference Repositories
+
+This is a personal fork built on upstream work. The projects it draws from — and
+when we last checked them for changes worth porting — are tracked in
+[REFERENCES.md](REFERENCES.md), with the commit each was at on the last review so
+the next one only has to look at what's new.
+
 ## Credits
 
 Created by [@zarazhangrui](https://github.com/zarazhangrui).
