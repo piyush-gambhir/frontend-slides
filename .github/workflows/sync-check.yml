@@ -1,0 +1,15 @@
+name: skill-sync-check
+
+# Fails if the Claude Code plugin mirror has drifted from the canonical skill
+# files at the repo root. Run `bash sync.sh` locally to fix.
+on:
+  push:
+  pull_request:
+
+jobs:
+  sync-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify plugin mirror is in sync with root
+        run: bash sync.sh --check
