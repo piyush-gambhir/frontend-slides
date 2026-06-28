@@ -21,14 +21,32 @@ export default function DeckFrame({
   slug,
   interactive = false,
   className,
+  onEscape,
 }: {
   slug: string;
   interactive?: boolean;
   className?: string;
+  onEscape?: () => void;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [scale, setScale] = useState(0);
   const [loaded, setLoaded] = useState(false);
+
+  // When the deck iframe has focus it swallows keystrokes, so Escape never
+  // reaches the parent dialog. Listen inside the (same-origin) iframe too.
+  const handleLoad = () => {
+    setLoaded(true);
+    if (interactive && onEscape) {
+      try {
+        iframeRef.current?.contentWindow?.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') onEscape();
+        });
+      } catch {
+        /* cross-origin or detached — ignore */
+      }
+    }
+  };
 
   useLayoutEffect(() => {
     const el = wrapRef.current;
@@ -50,12 +68,13 @@ export default function DeckFrame({
   return (
     <div ref={wrapRef} className={cn('relative aspect-video w-full overflow-hidden bg-muted', className)}>
       <iframe
+        ref={iframeRef}
         src={`/templates/${slug}.html`}
         title={`${slug} preview`}
         loading="lazy"
         scrolling="no"
         tabIndex={interactive ? 0 : -1}
-        onLoad={() => setLoaded(true)}
+        onLoad={handleLoad}
         style={{
           position: 'absolute',
           top: 0,

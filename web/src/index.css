@@ -30,6 +30,14 @@
     border-color: hsl(var(--border));
   }
 
+  /* Lock the page: nothing scrolls except the grid region (main). */
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
+  }
+
   body {
     /* Subtle gray canvas so the white, borderless cards read as surfaces. */
     background: #f5f5f7;
