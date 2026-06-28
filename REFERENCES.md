@@ -74,10 +74,11 @@ format (see notes).
   not our `design.md`/`preview.md`/`selection-index.json` pack format. When we
   build our own "add a template" tooling (Phase 1), mirror the idea and output
   our format.
-- **Vendored into `web/`:** the template gallery (`web/`) renders templates live,
-  so it vendors each `template.html` plus the shared `runtime/deck-stage.js` from
-  this repo at the pinned SHA via `web/scripts/fetch-templates.mjs` (`npm run
-  fetch`). Those files are gitignored; bump the pin there + here together when
-  re-vendoring.
+- **FORKED & OWNED (2026-06-29):** we now own the full template HTML in-repo at
+  `web/public/templates/<slug>.html` (+ shared `deck-stage.js`) and polish them in
+  place — they are committed, not gitignored. The fork point is this SHA
+  (`e5e204f`). `web/scripts/fetch-templates.mjs` re-imports pristine upstream
+  copies only with `--force` (it otherwise refuses, to protect our edits). Treat
+  upstream template changes as optional cherry-picks now, not auto-pulls.
 - **Notes (2026-06-29):** template set is identical to ours (34, no additions);
   upstream has not changed since before we cloned. Nothing to import right now.

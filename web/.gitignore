@@ -3,7 +3,9 @@ dist
 .vite
 *.log
 
-# Vendored from beautiful-html-templates by `npm run fetch` — not committed
-# (upstream MIT content; provenance pinned in scripts/fetch-templates.mjs).
-public/templates/
-public/data/
+# public/templates/ and public/data/templates.json are now OWNED and committed
+# (forked from beautiful-html-templates @ e5e204f — see REFERENCES.md). We polish
+# them in place; scripts/fetch-templates.mjs only re-imports with --force.
+
+# Batch QA screenshots — regenerated, not committed.
+public/_review/

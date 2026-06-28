@@ -23,16 +23,16 @@ small measured value, not pure CSS.)
 
 ```bash
 npm install
-npm run fetch     # vendors template HTML from upstream into public/ (one-time)
 npm run dev
 ```
 
-`npm run fetch` downloads each template's self-contained `template.html` (plus the
-shared `deck-stage.js` runtime) from the pinned upstream commit into
-`public/templates/`, and writes the metadata index to `public/data/templates.json`.
-These files are gitignored (upstream MIT content); the provenance/commit pin lives
-in `scripts/fetch-templates.mjs` and `../REFERENCES.md`. Re-vendor a newer snapshot
-with `TEMPLATES_REF=<sha|branch> npm run fetch` (then bump `REFERENCES.md`).
+The templates are **owned and committed** under `public/templates/` (forked from
+upstream `beautiful-html-templates` @ `e5e204f` — see `../REFERENCES.md`). We
+polish them in place, so there's nothing to fetch after clone.
+
+`npm run fetch` is now only a deliberate re-import of pristine upstream copies and
+**refuses to run without `--force`** (it would overwrite our edits):
+`node scripts/fetch-templates.mjs --force`.
 
 ## How the live thumbnails work
 

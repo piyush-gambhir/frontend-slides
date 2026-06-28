@@ -11,7 +11,8 @@
 // Pin matches REFERENCES.md. Override with TEMPLATES_REF=<sha|branch> to re-vendor
 // a newer snapshot (then bump REFERENCES.md).
 
-import { mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdir, writeFile, rm, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,9 +35,19 @@ async function getText(url) {
   return r.text();
 }
 
+// The templates are now OWNED and committed (we polish them in place). This
+// importer re-pulls the pristine upstream copies and OVERWRITES local edits, so
+// it refuses to run unless you pass --force.
+if (existsSync(TPL_DIR) && (await readdir(TPL_DIR)).some((f) => f.endsWith('.html')) && !process.argv.includes('--force')) {
+  console.error('Refusing to overwrite owned templates in public/templates/.');
+  console.error('These are committed and polished in place. To re-import pristine upstream copies');
+  console.error('(discarding local edits), run:  node scripts/fetch-templates.mjs --force');
+  process.exit(2);
+}
+
 const index = JSON.parse(await getText(raw('index.json')));
 const list = Array.isArray(index) ? index : index.templates;
-console.log(`Vendoring ${list.length} templates from ${REPO}@${REF.slice(0, 7)} …`);
+console.log(`Importing ${list.length} templates from ${REPO}@${REF.slice(0, 7)} …`);
 
 await rm(TPL_DIR, { recursive: true, force: true });
 await mkdir(TPL_DIR, { recursive: true });
