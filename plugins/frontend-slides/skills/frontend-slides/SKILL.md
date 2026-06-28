@@ -79,7 +79,7 @@ When enhancing existing presentations, fixed-stage fitting is the biggest risk:
 1. **Before adding content:** Count existing elements, check against density limits
 2. **Adding images:** Fit them inside the 1920×1080 slide canvas. If slide already has max content, split into two slides
 3. **Adding text:** Max 4-6 bullets per slide. Exceeds limits? Split into continuation slides
-4. **After ANY modification, verify:** the slide stage remains 16:9, no text overflows its card, no panels overlap, and screenshots look correct at 1280×720 plus one phone viewport
+4. **After ANY modification, verify:** run `bash scripts/check-slides.sh <deck.html>` to confirm no content overflows the frame and no panels overlap, then check the stage is still 16:9 and screenshots look correct at 1280×720 plus one phone viewport
 5. **Proactively reorganize:** If modifications will cause overflow, automatically split content and inform the user. Don't wait to be asked
 
 **When adding images to existing slides:** Move image to a new slide or reduce other content first. Never add images without checking if existing content already fills the 1920×1080 slide stage.
@@ -222,7 +222,7 @@ If the user selected a bold template from `bold-template-pack`, read that one te
 - Keep the output as a single self-contained Frontend Slides HTML file.
 - Do not copy demo slide content or mimic the source template too literally.
 - Use `template.html` only as a last-resort implementation reference for the selected template.
-- After generating, verify both content overflow and panel overlap in rendered browser screenshots. `scrollHeight` checks alone are not enough because grid panels can visually cover each other.
+- After generating, verify both content overflow and panel overlap with `bash scripts/check-slides.sh <deck.html>` (see "Verify before delivering"). `scrollHeight` checks alone are not enough because grid panels can visually cover each other.
 
 If the user selected a self-generated custom wildcard, treat that preview's CSS and layout as the design recipe:
 
@@ -244,6 +244,29 @@ If the user selected a self-generated custom wildcard, treat that preview's CSS 
 - Use fonts from Fontshare or Google Fonts — never system fonts
 - Add detailed comments explaining each section
 - Every section needs a clear `/* === SECTION NAME === */` comment block
+
+### Verify before delivering (REQUIRED)
+
+The fixed stage clips everything with `overflow: hidden`, so a slide can look
+perfect in a screenshot while text or media is silently cut off past the
+1920×1080 frame, or while grid/flex panels cover each other. Eyeballing misses
+this. After generating (or modifying) a deck, run the automated check:
+
+```bash
+bash scripts/check-slides.sh <deck.html>      # or a folder containing index.html
+```
+
+- It loads the deck headlessly and measures the live DOM for **overflow**
+  (content past the frame) and **overlap** (panels colliding), reporting the
+  offending element per slide.
+- **Fix every `overflow` finding** — split the slide, shorten copy, or resize
+  media until the run passes — then regenerate and re-check.
+- Treat `overlap` findings as real layout bugs unless you can confirm the
+  overlap is intentional (e.g. deliberately layered design).
+- Add `--json` for machine-readable output, `--strict` to fail on overlap too.
+
+This is the authoritative structural check; a visual screenshot pass is still
+useful for aesthetics, but it does not replace this.
 
 ---
 
@@ -375,6 +398,7 @@ This captures each slide as a screenshot and combines them into a PDF. Perfect f
 | [viewport-base.css](viewport-base.css)             | Mandatory fixed-stage CSS — copy into every presentation             | Phase 3 (generation)      |
 | [html-template.md](html-template.md)               | HTML structure, JS features, code quality standards                  | Phase 3 (generation)      |
 | [animation-patterns.md](animation-patterns.md)     | CSS/JS animation snippets and effect-to-feeling guide                | Phase 3 (generation)      |
+| [scripts/check-slides.sh](scripts/check-slides.sh) | Automated overflow/overlap QA (measures the live DOM)                | Phase 3 (verify before delivering) |
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | Python script for PPT content extraction                             | Phase 4 (conversion)      |
 | [scripts/deploy.sh](scripts/deploy.sh)             | Deploy slides to Vercel for instant sharing                          | Phase 6 (sharing)         |
 | [scripts/export-pdf.sh](scripts/export-pdf.sh)     | Export slides to PDF                                                 | Phase 6 (sharing)         |

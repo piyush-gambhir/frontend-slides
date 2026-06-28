@@ -528,6 +528,7 @@ This skill uses **progressive disclosure** — the main `SKILL.md` is a workflow
 | `viewport-base.css`       | Mandatory fixed-stage CSS      | Phase 3 (generation)      |
 | `html-template.md`        | HTML structure and JS features | Phase 3 (generation)      |
 | `animation-patterns.md`   | CSS/JS animation reference     | Phase 3 (generation)      |
+| `scripts/check-slides.sh` | Automated overflow/overlap QA  | Phase 3 (verify)          |
 | `scripts/extract-pptx.py` | PPT content extraction         | Phase 4 (conversion)      |
 | `scripts/deploy.sh`       | Deploy to Vercel               | Phase 6 (sharing)         |
 | `scripts/export-pdf.sh`   | Export slides to PDF           | Phase 6 (sharing)         |
