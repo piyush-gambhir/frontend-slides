@@ -49,46 +49,52 @@ export default function App() {
   }, [templates, filters]);
 
   return (
-    <div className="mx-auto max-w-[1480px] px-7 pb-20 pt-8">
-      <header className="sticky top-0 z-20 bg-gradient-to-b from-[#f5f5f7] from-80% to-transparent pb-4">
-        <div>
+    <div className="flex h-screen flex-col">
+      {/* Fixed header — stays put while only the grid below scrolls. */}
+      <header className="z-10 shrink-0 bg-[#f5f5f7] px-7 pb-4 pt-8 shadow-sm">
+        <div className="mx-auto max-w-[1480px]">
           <h1 className="text-[27px] font-bold tracking-tight">Frontend Slides — Template Gallery</h1>
           <p className="mb-4 mt-1 text-sm text-muted-foreground">
             Live first-slide previews of every bold template. Click any card to open the full slideshow.
           </p>
+          {load.status === 'ready' && (
+            <Filters state={filters} facets={facets} shown={shown.length} total={templates.length} onChange={setFilters} />
+          )}
         </div>
-        {load.status === 'ready' && (
-          <Filters state={filters} facets={facets} shown={shown.length} total={templates.length} onChange={setFilters} />
-        )}
       </header>
 
-      {load.status === 'loading' && <p className="py-16 text-center text-muted-foreground">Loading templates…</p>}
+      {/* Only this region scrolls. */}
+      <main className="flex-1 overflow-y-auto px-7 pb-20 pt-5">
+        <div className="mx-auto max-w-[1480px]">
+          {load.status === 'loading' && <p className="py-16 text-center text-muted-foreground">Loading templates…</p>}
 
-      {load.status === 'empty' && (
-        <div className="mx-auto mt-16 max-w-xl rounded-xl bg-card p-8 text-center shadow-sm">
-          <h2 className="mb-2 text-xl font-semibold">No templates vendored yet</h2>
-          <p className="text-muted-foreground">The gallery renders the real template HTML, fetched from upstream once:</p>
-          <pre className="my-4 inline-block rounded-md bg-muted px-4 py-3 text-sm">npm run fetch</pre>
-          <p className="text-muted-foreground">Then reload this page.</p>
-        </div>
-      )}
-
-      {load.status === 'ready' && (
-        <main className="mt-3 grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(330px,1fr))]">
-          {shown.map((t) => (
-            <TemplateCard key={t.slug} template={t} onOpen={setSelected} />
-          ))}
-          {shown.length === 0 && (
-            <p className="col-span-full py-16 text-center text-muted-foreground">No templates match these filters.</p>
+          {load.status === 'empty' && (
+            <div className="mx-auto mt-16 max-w-xl rounded-xl bg-card p-8 text-center shadow-sm">
+              <h2 className="mb-2 text-xl font-semibold">No templates vendored yet</h2>
+              <p className="text-muted-foreground">The gallery renders the real template HTML, fetched from upstream once:</p>
+              <pre className="my-4 inline-block rounded-md bg-muted px-4 py-3 text-sm">npm run fetch</pre>
+              <p className="text-muted-foreground">Then reload this page.</p>
+            </div>
           )}
-        </main>
-      )}
 
-      {load.status === 'ready' && (
-        <footer className="mt-10 text-center text-xs text-muted-foreground">
-          Templates from <code className="text-foreground">{load.data.source}</code> · {load.data.fetched_count} vendored
-        </footer>
-      )}
+          {load.status === 'ready' && (
+            <div className="grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(330px,1fr))]">
+              {shown.map((t) => (
+                <TemplateCard key={t.slug} template={t} onOpen={setSelected} />
+              ))}
+              {shown.length === 0 && (
+                <p className="col-span-full py-16 text-center text-muted-foreground">No templates match these filters.</p>
+              )}
+            </div>
+          )}
+
+          {load.status === 'ready' && (
+            <footer className="mt-10 text-center text-xs text-muted-foreground">
+              Templates from <code className="text-foreground">{load.data.source}</code> · {load.data.fetched_count} vendored
+            </footer>
+          )}
+        </div>
+      </main>
 
       <PresentDialog template={selected} onClose={() => setSelected(null)} />
     </div>
