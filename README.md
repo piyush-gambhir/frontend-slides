@@ -1,16 +1,31 @@
 # Frontend Slides
 
-A coding-agent skill for creating stunning HTML presentations — from scratch or by converting PowerPoint files. It is packaged as a Claude Code plugin, and the core `SKILL.md` can also be read by other coding agents with filesystem and shell access.
+> A personal project by **[Piyush Gambhir](https://github.com/piyush-gambhir)** — growing a coding-agent skill into a full AI slide generator.
 
-## 📺 Watch the Walkthrough & Tutorial
+**Frontend Slides** makes a coding agent produce stunning, zero-dependency HTML
+presentations — from a prompt or a PowerPoint — in distinctive, non-generic
+styles. This repo is being built from a single agent skill into a complete
+slide-generation product with multiple surfaces.
 
-New here? This beginner-friendly video walks you through the whole thing, start to finish.
+### What's in this repo
 
-<a href="https://www.youtube.com/watch?v=372Iksaz8b0" title="Frontend Slides — walkthrough & tutorial (beginner-friendly)">
-  <img src="https://img.youtube.com/vi/372Iksaz8b0/maxresdefault.jpg" alt="Watch the Frontend Slides walkthrough and tutorial on YouTube" width="100%" />
-</a>
+- **The skill** — [`SKILL.md`](SKILL.md) and its supporting files: the core
+  engine an agent follows to design and generate decks. Packaged as a Claude Code
+  plugin and readable by any agent with filesystem + shell access.
+- **An owned template library** — 34 polished bold templates in
+  [`web/public/templates/`](web/public/templates), forked from upstream and now
+  maintained and improved here.
+- **A template gallery** — [`web/`](web/): a React + shadcn/ui app to browse every
+  template with live first-slide previews and open any as a full slideshow.
+- **Automated visual QA** — [`scripts/check-slides.sh`](scripts/check-slides.sh):
+  catches off-screen / overlapping content the fixed 16:9 stage would otherwise
+  hide.
 
-> ▶️ **[Watch on YouTube →](https://www.youtube.com/watch?v=372Iksaz8b0)** (beginner-friendly walkthrough and tutorial)
+**Roadmap:** agent skill ✅ → template gallery ✅ → CLI → web app. The skill is
+the shared core every surface reuses.
+
+> Forked from and built on [@zarazhangrui](https://github.com/zarazhangrui)'s work
+> — see [Credits & References](#credits--references) at the bottom.
 
 ## What This Does
 
@@ -588,22 +603,34 @@ Uses [Playwright](https://playwright.dev) to screenshot each slide at 1920×1080
 
 ## Template Gallery (web)
 
-[`web/`](web/) is a Vite + React gallery for browsing every bold template with
-**live first-slide thumbnails** (the real template HTML rendered in an iframe, not
-screenshots) plus filter/search. It's the first piece of the planned web surface.
-See [web/README.md](web/README.md) — `npm install && npm run fetch && npm run dev`.
+[`web/`](web/) is a Vite + React + shadcn/ui gallery for browsing every template
+with **live first-slide previews** — the real template HTML rendered in an iframe
+and scaled to a true 16:9, not screenshots — plus filter/search and a
+click-to-open full slideshow. The templates are owned and committed, so setup is
+just `npm install && npm run dev`. See [web/README.md](web/README.md).
 
-## Reference Repositories
+## Credits & References
 
-This is a personal fork built on upstream work. The projects it draws from — and
-when we last checked them for changes worth porting — are tracked in
-[REFERENCES.md](REFERENCES.md), with the commit each was at on the last review so
-the next one only has to look at what's new.
+This project is **forked from and built on top of** the following MIT-licensed
+work by **[@zarazhangrui](https://github.com/zarazhangrui)**:
 
-## Credits
+- **[zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)**
+  — the original coding-agent skill this repo was forked from (imported at commit
+  `9906a34`). The core skill design and the original
+  [walkthrough/tutorial video](https://www.youtube.com/watch?v=372Iksaz8b0) are theirs.
+- **[zarazhangrui/beautiful-html-templates](https://github.com/zarazhangrui/beautiful-html-templates)**
+  — the source of the 34 bold templates (forked at commit `e5e204f`, now owned and
+  polished in this repo).
 
-Created by [@zarazhangrui](https://github.com/zarazhangrui).
+Full provenance — and when each upstream was last reviewed for changes worth
+porting — is tracked in **[REFERENCES.md](REFERENCES.md)**.
+
+**In short: this is forked from the projects above and is being built on top of
+them** — extended here with an owned/polished template library, a template
+gallery, automated visual QA, single-source plugin packaging, and a roadmap toward
+CLI and web surfaces.
 
 ## License
 
-MIT — Use it, modify it, share it.
+MIT — see [LICENSE](LICENSE). Original work © [@zarazhangrui](https://github.com/zarazhangrui);
+modifications and additions © [Piyush Gambhir](https://github.com/piyush-gambhir).
