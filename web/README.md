@@ -2,10 +2,22 @@
 
 A browsable gallery of every Frontend Slides bold template, with **live
 first-slide thumbnails** — each card renders the real template HTML in an iframe,
-not a screenshot. Click a card to open the full deck and navigate it with the
-arrow keys. Filter by scheme, formality, mood, or free-text search.
+not a screenshot. Click a card to open the deck as a near-fullscreen slideshow and
+navigate it with the arrow keys. Filter by scheme, formality, mood, or free-text
+search.
 
-This is the first piece of the planned web surface (see `../DEVELOPING.md`).
+This is the first piece of the planned web surface (see `../DEVELOPING.md`). UI is
+built with [shadcn/ui](https://ui.shadcn.com) (Tailwind + Radix); components live
+in `src/components/ui/`.
+
+## How thumbnails fit any size
+
+Decks are authored for a full 1920×1080 viewport and don't scale down gracefully
+in a tiny iframe — they crop. So `DeckFrame` renders the iframe at its true
+1920×1080 size and uniformly shrinks it with `transform: scale(factor)`, where
+`factor = containerWidth / 1920` is measured on mount + window resize. (CSS
+container units can't drive `scale()` — it needs a unitless number — so this is a
+small measured value, not pure CSS.)
 
 ## Setup
 

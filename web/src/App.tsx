@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Template, TemplatesData } from './types';
 import TemplateCard from './components/TemplateCard';
-import TemplateModal from './components/TemplateModal';
+import PresentDialog from './components/PresentDialog';
 import Filters, { EMPTY_FILTERS, type FilterState } from './components/Filters';
 
 type LoadState =
@@ -49,50 +49,48 @@ export default function App() {
   }, [templates, filters]);
 
   return (
-    <div className="app">
-      <header className="app__header">
-        <div className="app__brand">
-          <h1>Frontend Slides — Template Gallery</h1>
-          <p>Live first-slide previews of every bold template. Click any card to browse the full deck.</p>
+    <div className="mx-auto max-w-[1480px] px-7 pb-20 pt-8">
+      <header className="sticky top-0 z-20 bg-gradient-to-b from-[#f5f5f7] from-80% to-transparent pb-4">
+        <div>
+          <h1 className="text-[27px] font-bold tracking-tight">Frontend Slides — Template Gallery</h1>
+          <p className="mb-4 mt-1 text-sm text-muted-foreground">
+            Live first-slide previews of every bold template. Click any card to open the full slideshow.
+          </p>
         </div>
         {load.status === 'ready' && (
-          <Filters
-            state={filters}
-            facets={facets}
-            shown={shown.length}
-            total={templates.length}
-            onChange={setFilters}
-          />
+          <Filters state={filters} facets={facets} shown={shown.length} total={templates.length} onChange={setFilters} />
         )}
       </header>
 
-      {load.status === 'loading' && <p className="state">Loading templates…</p>}
+      {load.status === 'loading' && <p className="py-16 text-center text-muted-foreground">Loading templates…</p>}
 
       {load.status === 'empty' && (
-        <div className="state state--empty">
-          <h2>No templates vendored yet</h2>
-          <p>The gallery renders the real template HTML, which is fetched from upstream once:</p>
-          <pre>npm run fetch</pre>
-          <p>Then reload this page.</p>
+        <div className="mx-auto mt-16 max-w-xl rounded-xl bg-card p-8 text-center shadow-sm">
+          <h2 className="mb-2 text-xl font-semibold">No templates vendored yet</h2>
+          <p className="text-muted-foreground">The gallery renders the real template HTML, fetched from upstream once:</p>
+          <pre className="my-4 inline-block rounded-md bg-muted px-4 py-3 text-sm">npm run fetch</pre>
+          <p className="text-muted-foreground">Then reload this page.</p>
         </div>
       )}
 
       {load.status === 'ready' && (
-        <main className="grid">
+        <main className="mt-3 grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(330px,1fr))]">
           {shown.map((t) => (
             <TemplateCard key={t.slug} template={t} onOpen={setSelected} />
           ))}
-          {shown.length === 0 && <p className="state">No templates match these filters.</p>}
+          {shown.length === 0 && (
+            <p className="col-span-full py-16 text-center text-muted-foreground">No templates match these filters.</p>
+          )}
         </main>
       )}
 
       {load.status === 'ready' && (
-        <footer className="app__footer">
-          Templates from <code>{load.data.source}</code> · {load.data.fetched_count} vendored
+        <footer className="mt-10 text-center text-xs text-muted-foreground">
+          Templates from <code className="text-foreground">{load.data.source}</code> · {load.data.fetched_count} vendored
         </footer>
       )}
 
-      {selected && <TemplateModal template={selected} onClose={() => setSelected(null)} />}
+      <PresentDialog template={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }

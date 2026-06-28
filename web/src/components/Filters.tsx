@@ -1,3 +1,7 @@
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 export interface FilterState {
   query: string;
   scheme: string;
@@ -6,6 +10,8 @@ export interface FilterState {
 }
 
 export const EMPTY_FILTERS: FilterState = { query: '', scheme: '', formality: '', mood: '' };
+
+const ALL = '__all__';
 
 interface Facets {
   schemes: string[];
@@ -30,32 +36,53 @@ export default function Filters({
   const active = state.query || state.scheme || state.formality || state.mood;
 
   return (
-    <div className="filters">
-      <input
-        className="filters__search"
+    <div className="flex flex-wrap items-center gap-2.5">
+      <Input
         type="search"
         placeholder="Search name, tagline, mood…"
         value={state.query}
         onChange={(e) => set({ query: e.target.value })}
+        className="min-w-[200px] flex-1"
       />
-      <Select label="Scheme" value={state.scheme} options={facets.schemes} onChange={(v) => set({ scheme: v })} />
-      <Select label="Formality" value={state.formality} options={facets.formalities} onChange={(v) => set({ formality: v })} />
-      <Select label="Mood" value={state.mood} options={facets.moods} onChange={(v) => set({ mood: v })} />
-      <span className="filters__count">{shown} / {total}</span>
+      <FacetSelect label="Scheme" value={state.scheme} options={facets.schemes} onChange={(v) => set({ scheme: v })} />
+      <FacetSelect label="Formality" value={state.formality} options={facets.formalities} onChange={(v) => set({ formality: v })} />
+      <FacetSelect label="Mood" value={state.mood} options={facets.moods} onChange={(v) => set({ mood: v })} />
+      <span className="ml-1 whitespace-nowrap text-sm tabular-nums text-muted-foreground">
+        {shown} / {total}
+      </span>
       {active ? (
-        <button className="filters__clear" onClick={() => onChange(EMPTY_FILTERS)}>Clear</button>
+        <Button variant="secondary" size="sm" onClick={() => onChange(EMPTY_FILTERS)}>
+          Clear
+        </Button>
       ) : null}
     </div>
   );
 }
 
-function Select({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (v: string) => void }) {
+function FacetSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+}) {
   return (
-    <select className="filters__select" value={value} onChange={(e) => onChange(e.target.value)} aria-label={label}>
-      <option value="">{label}: all</option>
-      {options.map((o) => (
-        <option key={o} value={o}>{o}</option>
-      ))}
-    </select>
+    <Select value={value || ALL} onValueChange={(v) => onChange(v === ALL ? '' : v)}>
+      <SelectTrigger className="w-[150px] capitalize">
+        <SelectValue placeholder={label} />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value={ALL}>{label}: all</SelectItem>
+        {options.map((o) => (
+          <SelectItem key={o} value={o} className="capitalize">
+            {o}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }
