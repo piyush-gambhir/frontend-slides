@@ -50,12 +50,17 @@ chmod +x .git/hooks/pre-commit
         ┌─────────────────┼─────────────────┐
    Agent skill          CLI tool          Web app
    (Claude Code)      slidegen "..."    (Claude API)
-     [shipped]           [planned]         [planned]
+     [shipped]           [planned]      [started: web/]
 ```
 
-The CLI and web app will live as sibling directories (e.g. `cli/`, `web/`) that
-read the same root skill files, so quality improvements to the core benefit all
-three. Keep new core logic in the root files, not in a surface.
+The CLI and web app live as sibling directories that read the same core, so
+quality improvements to the core benefit all three. Keep new core logic in the
+root files, not in a surface.
+
+- **`web/`** — Vite + React template gallery (first web screen): live
+  first-slide thumbnails of every bold template, with filter/search. See
+  [web/README.md](web/README.md). It vendors template HTML from upstream via
+  `npm run fetch` (gitignored).
 
 ## Upstream
 

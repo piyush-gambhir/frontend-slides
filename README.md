@@ -586,6 +586,13 @@ Uses [Playwright](https://playwright.dev) to screenshot each slide at 1920×1080
 - For URL deployment: Node.js + Vercel account (free)
 - For PDF export: Node.js (Playwright installs automatically)
 
+## Template Gallery (web)
+
+[`web/`](web/) is a Vite + React gallery for browsing every bold template with
+**live first-slide thumbnails** (the real template HTML rendered in an iframe, not
+screenshots) plus filter/search. It's the first piece of the planned web surface.
+See [web/README.md](web/README.md) — `npm install && npm run fetch && npm run dev`.
+
 ## Reference Repositories
 
 This is a personal fork built on upstream work. The projects it draws from — and

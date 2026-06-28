@@ -74,5 +74,10 @@ format (see notes).
   not our `design.md`/`preview.md`/`selection-index.json` pack format. When we
   build our own "add a template" tooling (Phase 1), mirror the idea and output
   our format.
+- **Vendored into `web/`:** the template gallery (`web/`) renders templates live,
+  so it vendors each `template.html` plus the shared `runtime/deck-stage.js` from
+  this repo at the pinned SHA via `web/scripts/fetch-templates.mjs` (`npm run
+  fetch`). Those files are gitignored; bump the pin there + here together when
+  re-vendoring.
 - **Notes (2026-06-29):** template set is identical to ours (34, no additions);
   upstream has not changed since before we cloned. Nothing to import right now.

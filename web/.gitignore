@@ -1,0 +1,9 @@
+node_modules
+dist
+.vite
+*.log
+
+# Vendored from beautiful-html-templates by `npm run fetch` — not committed
+# (upstream MIT content; provenance pinned in scripts/fetch-templates.mjs).
+public/templates/
+public/data/
