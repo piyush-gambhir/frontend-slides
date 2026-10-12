@@ -15,13 +15,13 @@ export default function TemplateCard({ template, onOpen }: { template: Template;
           onOpen(template);
         }
       }}
-      className="group cursor-pointer overflow-hidden outline-none transition-all hover:-translate-y-1 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="group cursor-pointer overflow-hidden outline-hidden transition-all hover:-translate-y-1 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       <div className="relative">
         <DeckFrame slug={template.slug} />
         <Badge
           variant={template.scheme === 'dark' ? 'default' : 'secondary'}
-          className="absolute right-3 top-3 capitalize shadow-sm backdrop-blur"
+          className="absolute right-3 top-3 capitalize shadow-xs backdrop-blur-sm"
         >
           {template.scheme}
         </Badge>

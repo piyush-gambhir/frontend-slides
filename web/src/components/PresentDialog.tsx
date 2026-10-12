@@ -55,7 +55,7 @@ export default function PresentDialog({ template, onClose }: { template: Templat
         type="button"
         aria-label="Close"
         onClick={onClose}
-        className="flex items-center justify-center rounded-full bg-white text-xl text-foreground shadow-md outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex items-center justify-center rounded-full bg-white text-xl text-foreground shadow-md outline-hidden transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
         style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10, height: '40px', width: '40px' }}
       >
         ×
