@@ -10,6 +10,6 @@ jobs:
   sync-check:
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Verify plugin mirror is in sync with root
         run: bash sync.sh --check

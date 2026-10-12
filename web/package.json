@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Web gallery for browsing all Frontend Slides bold templates with live first-slide thumbnails.",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "fetch": "node scripts/fetch-templates.mjs",
     "dev": "vite",
@@ -22,6 +25,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/node": "^24.19.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
