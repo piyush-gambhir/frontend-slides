@@ -21,8 +21,11 @@ small measured value, not pure CSS.)
 
 ## Setup
 
+The repository pins Node 26.12.1 in `.node-version`. From `web/`:
+
 ```bash
-npm install
+npm ci
+npm run typecheck
 npm run dev
 ```
 
@@ -45,9 +48,10 @@ relative path — a single shared copy in `public/templates/` satisfies them all
 
 | Command | What it does |
 | ------- | ------------ |
-| `npm run fetch` | Vendor template HTML + metadata from upstream (run once after install) |
+| `npm run fetch` | Guarded upstream re-import; not needed after clone and refuses without explicit `--force` |
 | `npm run dev`   | Start the Vite dev server |
-| `npm run build` | Type-check-free production build to `dist/` |
+| `npm run typecheck` | Explicit TypeScript 7 check using the installed compiler |
+| `npm run build` | Production bundle to `dist/`; typecheck is a separate CI step |
 | `npm run preview` | Serve the production build locally |
 
 ## Stack
