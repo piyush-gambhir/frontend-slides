@@ -21,7 +21,7 @@ small measured value, not pure CSS.)
 
 ## Setup
 
-The repository pins Node 26.12.1 in `.node-version`. From `web/`:
+The repository pins Node 26.12.1 in `web/.nvmrc`. From `web/`:
 
 ```bash
 npm ci
