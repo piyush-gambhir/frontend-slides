@@ -47,6 +47,10 @@ if (existsSync(TPL_DIR) && (await readdir(TPL_DIR)).some((f) => f.endsWith('.htm
 
 const index = JSON.parse(await getText(raw('index.json')));
 const list = Array.isArray(index) ? index : index.templates;
+if (!Array.isArray(list) || list.some((template) =>
+  !template || typeof template.slug !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(template.slug))) {
+  throw new Error('Template index contains an invalid filename slug');
+}
 console.log(`Importing ${list.length} templates from ${REPO}@${REF.slice(0, 7)} …`);
 
 await rm(TPL_DIR, { recursive: true, force: true });
