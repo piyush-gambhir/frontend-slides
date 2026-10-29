@@ -20,10 +20,9 @@
 //
 // Exit codes: 0 = clean · 1 = problems found · 2 = bad input / no slides found.
 
-import { chromium } from 'playwright';
 import { createServer } from 'http';
 import { readFileSync, statSync, realpathSync } from 'fs';
-import { join, dirname, basename, extname } from 'path';
+import { join, dirname, basename, extname, relative, isAbsolute, sep } from 'path';
 import { pathToFileURL } from 'url';
 
 // ─── Tunable thresholds ───────────────────────────────────────────────────────
@@ -155,20 +154,33 @@ function analyzeInPage({ slideIndex, cfg }) {
 }
 
 // Start a tiny static server rooted at the deck's folder (fonts/assets need HTTP).
-function serve(rootDir, indexFile) {
+export function serve(rootDir, indexFile) {
+  const root = realpathSync(rootDir);
   const server = createServer((req, res) => {
-    const url = decodeURIComponent((req.url || '/').split('?')[0]);
-    const filePath = join(rootDir, url === '/' ? indexFile : url);
+    const port = server.address().port;
+    if (![ `127.0.0.1:${port}`, `localhost:${port}` ].includes(req.headers.host)) {
+      res.writeHead(403);
+      res.end('Forbidden');
+      return;
+    }
     try {
+      const url = decodeURIComponent((req.url || '/').split('?')[0]);
+      const filePath = realpathSync(join(root, url === '/' ? indexFile : url));
+      const within = relative(root, filePath);
+      if (within === '..' || within.startsWith(`..${sep}`) || isAbsolute(within)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
       const body = readFileSync(filePath);
       res.writeHead(200, { 'Content-Type': MIME[extname(filePath).toLowerCase()] || 'application/octet-stream' });
       res.end(body);
-    } catch {
-      res.writeHead(404);
-      res.end('Not found');
+    } catch (error) {
+      res.writeHead(error instanceof URIError ? 400 : 404);
+      res.end(error instanceof URIError ? 'Bad request' : 'Not found');
     }
   });
-  return new Promise((res) => server.listen(0, () => res({ server, port: server.address().port })));
+  return new Promise((res) => server.listen(0, '127.0.0.1', () => res({ server, port: server.address().port })));
 }
 
 /**
@@ -178,6 +190,7 @@ function serve(rootDir, indexFile) {
  * @returns {Promise<{ok,file,slideCount,errors,warnings,slides,noSlides?}>}
  */
 export async function checkSlides(htmlPath, opts = {}) {
+  const { chromium } = await import('playwright');
   const cfg = { ...DEFAULTS, ...opts };
   const st = statSync(htmlPath);
   const file = st.isDirectory() ? join(htmlPath, 'index.html') : htmlPath;
@@ -188,7 +201,7 @@ export async function checkSlides(htmlPath, opts = {}) {
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-    await page.goto(`http://localhost:${port}/`, { waitUntil: 'networkidle' });
+    await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts && document.fonts.ready);
     await page.waitForTimeout(600); // let web fonts settle (font swap changes text width)
 
