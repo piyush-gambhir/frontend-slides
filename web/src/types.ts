@@ -7,7 +7,7 @@ export interface Template {
   tone: string[];
   formality: string;
   density: string;
-  scheme: string; // "dark" | "light"
+  scheme: string;
   best_for: string;
   avoid_for: string;
   slide_count: number;

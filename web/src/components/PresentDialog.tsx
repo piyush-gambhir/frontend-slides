@@ -3,17 +3,17 @@ import { createPortal } from 'react-dom';
 import type { Template } from '../types';
 import DeckFrame from './DeckFrame';
 
-/**
- * Opens the real template deck as a near-fullscreen slideshow — exactly how it
- * would look when presented. No metadata panel; just the deck, navigable with
- * the arrow keys / space (click it first to focus).
- *
- * Deliberately a plain portal lightbox rather than Radix Dialog: the shared
- * DialogContent's base styling collapsed the box and pushed the close control
- * off-screen. This is full-control and reliably closeable via the × button, a
- * backdrop click, Escape on the page (window listener), or Escape inside the
- * focused deck iframe (DeckFrame.onEscape).
- */
+
+
+
+
+
+
+
+
+
+
+
 export default function PresentDialog({ template, onClose }: { template: Template | null; onClose: () => void }) {
   const open = !!template;
 
@@ -31,7 +31,7 @@ export default function PresentDialog({ template, onClose }: { template: Templat
   return createPortal(
     <div
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose(); // click the empty backdrop to close
+        if (e.target === e.currentTarget) onClose();
       }}
       style={{
         position: 'fixed',

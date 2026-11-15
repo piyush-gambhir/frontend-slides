@@ -1,35 +1,35 @@
 #!/usr/bin/env node
-// check-slides.mjs — Automated visual QA for Frontend Slides decks.
-//
-// The fixed 1920×1080 stage clips everything with overflow:hidden, so two real
-// failure modes are INVISIBLE in a screenshot — the deck looks fine while content
-// is broken. This tool measures the live DOM instead of eyeballing pixels:
-//
-//   • overflow — text or media laid out beyond the 1920×1080 slide and silently
-//     clipped. The content is lost, but a screenshot looks clean.
-//   • overlap  — sibling panels in a flow (flex/grid) container covering each
-//     other. This is the "grid panels can visually cover each other" failure
-//     that SKILL.md warns scrollHeight checks alone cannot catch.
-//
-// Usage (direct):    node check-slides.mjs <deck.html|deck-dir> [--json] [--strict] [--slide N]
-// Usage (bootstrap): bash scripts/check-slides.sh <deck.html|deck-dir> [flags]
-//
-// Importable as a library (for the planned CLI / web surfaces):
-//   import { checkSlides } from './check-slides.mjs'
-//   const report = await checkSlides('/abs/path/deck.html', { strict: false })
-//
-// Exit codes: 0 = clean · 1 = problems found · 2 = bad input / no slides found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { createServer } from 'http';
 import { readFileSync, statSync, realpathSync } from 'fs';
 import { join, dirname, basename, extname, relative, isAbsolute, sep } from 'path';
 import { pathToFileURL } from 'url';
 
-// ─── Tunable thresholds ───────────────────────────────────────────────────────
+
 const DEFAULTS = {
-  tol: 1.5,           // px past the frame before it counts as overflow (sub-pixel slack)
-  minArea: 4000,      // px²; ignore tiny boxes when checking panel overlap
-  overlapRatio: 0.2,  // flag overlap when intersection ≥ 20% of the smaller panel
+  tol: 1.5,
+  minArea: 4000,
+  overlapRatio: 0.2,
 };
 
 const MIME = {
@@ -41,16 +41,16 @@ const MIME = {
   '.mp4': 'video/mp4', '.webm': 'video/webm', '.ico': 'image/x-icon',
 };
 
-// Analysis for a single slide. SERIALIZED AND RUN IN THE BROWSER via page.evaluate,
-// so it must be self-contained (no Node closures) and take a single argument.
-// Returns { findings: [...], scroll: {w,h} } or { error }.
+
+
+
 function analyzeInPage({ slideIndex, cfg }) {
   const STAGE_W = 1920, STAGE_H = 1080, TOL = cfg.tol;
   const slides = document.querySelectorAll('.slide');
   const slide = slides[slideIndex];
   if (!slide) return { error: 'no-slide' };
 
-  // Show only this slide and remove the stage scale so 1 CSS px == 1 logical px.
+
   slides.forEach((s, i) => {
     s.classList.toggle('active', i === slideIndex);
     s.classList.toggle('visible', i === slideIndex);
@@ -58,14 +58,14 @@ function analyzeInPage({ slideIndex, cfg }) {
   const stage = document.querySelector('.deck-stage');
   if (stage) stage.style.transform = 'none';
 
-  // Force reveal/entrance animations into their final resting position — otherwise
-  // a pre-animation translateY would be mis-measured as overflow.
+
+
   slide.querySelectorAll('.reveal, [class*="reveal"]').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
     el.style.visibility = 'visible';
   });
-  void slide.getBoundingClientRect(); // flush layout
+  void slide.getBoundingClientRect();
 
   const sr = slide.getBoundingClientRect();
   const DECOR = /(^|[\s_-])(bg|background|backdrop|decor|decoration|glow|blob|particle|gradient|ornament|grain|noise|texture|halo|aura|shape|orb|gridlines?|grid-lines?|pattern|vignette|spotlight)([\s_-]|$)/i;
@@ -97,13 +97,13 @@ function analyzeInPage({ slideIndex, cfg }) {
 
   const findings = [];
 
-  // ── Overflow: visible text/media whose box extends past the 1920×1080 frame ──
+
   const MEDIA = new Set(['IMG', 'VIDEO', 'CANVAS', 'SVG', 'PICTURE']);
   slide.querySelectorAll('*').forEach((el) => {
     if (!isVisible(el) || isDecorative(el)) return;
     const isText = directText(el);
     const isMedia = MEDIA.has(el.tagName);
-    if (!isText && !isMedia) return; // only flag real content, not layout wrappers
+    if (!isText && !isMedia) return;
     const r = el.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) return;
     const right = r.right - sr.left - STAGE_W;
@@ -120,7 +120,7 @@ function analyzeInPage({ slideIndex, cfg }) {
     findings.push({ type: 'overflow', severity: 'error', amount: Math.round(worst), where: dirs.join(', '), element: desc(el) });
   });
 
-  // ── Overlap: flow siblings in a flex/grid (or grid-like) container colliding ──
+
   slide.querySelectorAll('*').forEach((container) => {
     const cs = getComputedStyle(container);
     const isFlow = cs.display.includes('flex') || cs.display.includes('grid');
@@ -130,7 +130,7 @@ function analyzeInPage({ slideIndex, cfg }) {
     const kids = Array.from(container.children).filter((el) => {
       if (!isVisible(el) || isDecorative(el)) return false;
       const p = getComputedStyle(el).position;
-      if (p === 'absolute' || p === 'fixed') return false; // layered on purpose
+      if (p === 'absolute' || p === 'fixed') return false;
       const r = el.getBoundingClientRect();
       return r.width * r.height >= cfg.minArea;
     });
@@ -153,7 +153,7 @@ function analyzeInPage({ slideIndex, cfg }) {
   return { findings, scroll: { w: slide.scrollWidth, h: slide.scrollHeight } };
 }
 
-// Start a tiny static server rooted at the deck's folder (fonts/assets need HTTP).
+
 export function serve(rootDir, indexFile) {
   const root = realpathSync(rootDir);
   const server = createServer((req, res) => {
@@ -203,7 +203,7 @@ export async function checkSlides(htmlPath, opts = {}) {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
     await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts && document.fonts.ready);
-    await page.waitForTimeout(600); // let web fonts settle (font swap changes text width)
+    await page.waitForTimeout(600);
 
     const slideCount = await page.evaluate(() => document.querySelectorAll('.slide').length);
     if (slideCount === 0) {
@@ -231,9 +231,9 @@ export async function checkSlides(htmlPath, opts = {}) {
   }
 }
 
-// ─── CLI ──────────────────────────────────────────────────────────────────────
-// Symlink-safe main check: macOS temp dirs live under /var → /private/var, and
-// Node realpaths import.meta.url, so a raw string compare against argv[1] fails.
+
+
+
 const isMain = (() => {
   try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
   catch { return false; }

@@ -650,45 +650,45 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
 </style>
 <script src="deck-stage.js"></script>
 
-<!-- reusable safety pin svg, used via <use href="#pin"> -->
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <!-- closed safety pin: coil on right, shaft sweeping left, clasp cap on the left holding the point -->
+
     <symbol id="pin" viewBox="0 0 360 110">
       <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- coiled spring (one continuous loop) -->
+
         <path d="M312 38 C 296 32, 290 50, 304 58 C 320 66, 340 60, 342 44 C 344 28, 322 18, 300 24"/>
-        <!-- top shaft running from coil to clasp -->
+
         <path d="M300 24 C 240 14, 140 14, 70 30"/>
-        <!-- bottom shaft (the part holding the point) curving back under -->
+
         <path d="M312 56 C 250 78, 150 82, 80 70"/>
-        <!-- clasp cap (oval) covering where the two shafts meet on the left -->
+
         <ellipse cx="58" cy="50" rx="24" ry="14"/>
       </g>
     </symbol>
 
-    <!-- open safety pin: clasp lifted, sharp point exposed pointing left -->
+
     <symbol id="pin-open" viewBox="0 0 360 130">
       <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- coiled spring -->
+
         <path d="M312 48 C 296 42, 290 60, 304 68 C 320 76, 340 70, 342 54 C 344 38, 322 28, 300 34"/>
-        <!-- top shaft -->
+
         <path d="M300 34 C 240 24, 140 24, 70 40"/>
-        <!-- bottom shaft (the pointed one), now extending past where the clasp would be, into a sharp point -->
+
         <path d="M312 66 C 250 90, 150 96, 80 86 L 24 78 L 38 70 M24 78 L 38 88"/>
-        <!-- clasp, lifted above where the point used to sit -->
+
         <ellipse cx="82" cy="32" rx="22" ry="12" transform="rotate(-18 82 32)"/>
       </g>
     </symbol>
 
-    <!-- arrow for process flow -->
+
     <symbol id="arr" viewBox="0 0 32 32">
       <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 16 H26 M19 9 L26 16 L19 23"/>
       </g>
     </symbol>
 
-    <!-- small inline mark for the top-chrome lockup -->
+
     <symbol id="mark" viewBox="0 0 32 16">
       <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="26" cy="8" r="5"/>
@@ -704,7 +704,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
 
 <deck-stage>
 
-  <!-- ============ 01 COVER ============ -->
+
   <section class="slide s-cover" data-screen-label="01 Cover" data-om-validate="false">
     <svg class="pin-1" viewBox="0 0 360 110"><use href="#pin"/></svg>
     <svg class="pin-2" viewBox="0 0 360 130"><use href="#pin-open"/></svg>
@@ -724,7 +724,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     </div>
   </section>
 
-  <!-- ============ 02 AGENDA ============ -->
+
   <section class="slide s-agenda" data-screen-label="02 Agenda" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Pin &amp; Paper</span>
@@ -760,7 +760,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>02 / 11</span></div>
   </section>
 
-  <!-- ============ 03 NOTECARDS ============ -->
+
   <section class="slide s-notes" data-screen-label="03 Principles" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Principles</span>
@@ -796,7 +796,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>03 / 11</span></div>
   </section>
 
-  <!-- ============ 04 SECTION DIVIDER ============ -->
+
   <section class="slide s-sec ink" data-screen-label="04 Section · Direction" data-om-validate="false">
     <div class="marker">Section II</div>
     <div class="label">Direction<br/>&amp; doctrine</div>
@@ -806,7 +806,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>04 / 11</span></div>
   </section>
 
-  <!-- ============ 05 NOTICE ============ -->
+
   <section class="slide s-notice" data-screen-label="05 Findings · Detail" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Findings · detail</span>
@@ -847,7 +847,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>05 / 11</span></div>
   </section>
 
-  <!-- ============ 06 CHART ============ -->
+
   <section class="slide s-chart ink" data-screen-label="06 Retention Curve" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Retention, by cohort</span>
@@ -889,7 +889,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>06 / 11</span></div>
   </section>
 
-  <!-- ============ 07 PROCESS ============ -->
+
   <section class="slide s-process" data-screen-label="07 Process" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> How we'll work</span>
@@ -945,7 +945,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>07 / 11</span></div>
   </section>
 
-  <!-- ============ 08 LEDGER ============ -->
+
   <section class="slide s-matrix" data-screen-label="08 Comparison" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Three pilots, side by side</span>
@@ -984,7 +984,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>08 / 11</span></div>
   </section>
 
-  <!-- ============ 09 STATS ============ -->
+
   <section class="slide s-stats" data-screen-label="09 In Numbers" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> In numbers</span>
@@ -1017,7 +1017,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>09 / 11</span></div>
   </section>
 
-  <!-- ============ 10 QUOTE ============ -->
+
   <section class="slide s-quote" data-screen-label="10 Voice" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> Client voice</span>
@@ -1036,7 +1036,7 @@ section.slide.ink .footer { color: var(--paper); opacity: .75; }
     <div class="footer"><span>North Field Office</span><span>10 / 11</span></div>
   </section>
 
-  <!-- ============ 11 CTA ============ -->
+
   <section class="slide s-cta" data-screen-label="11 Next" data-om-validate="false">
     <div class="top">
       <span class="lockup"><svg><use href="#mark"/></svg> What's next</span>
