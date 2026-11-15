@@ -3,9 +3,5 @@ dist
 .vite
 *.log
 
-# public/templates/ and public/data/templates.json are now OWNED and committed
-# (forked from beautiful-html-templates @ e5e204f — see REFERENCES.md). We polish
-# them in place; scripts/fetch-templates.mjs only re-imports with --force.
 
-# Batch QA screenshots — regenerated, not committed.
 public/_review/
