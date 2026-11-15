@@ -7,14 +7,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!--
-      Ivory Ledger font stack:
-        Jost          — geometric sans, the backbone (weights 200–600)
-        JetBrains Mono— chrome labels, sidebar metadata, mono elements
-        Lora          — serif for insight card titles and quotes (italic)
-        Noto Serif SC — CJK serif fallback
-        Noto Sans SC  — CJK sans fallback
-    -->
+
+
+
+
+
+
+
+
     <link
       href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500&display=swap"
       rel="stylesheet"
@@ -1565,23 +1565,23 @@
   </head>
   <body>
     <div id="deck">
-      <!-- ══════════════════════════════════════════════════════════════════
-       SLIDE 01 · COVER (light — cream)
-       ──────────────────────────────────────────────────────────────────
-       Opening slide. Content anchors to the bottom of the slide.
-       Top-right mono label: deck title and date.
-       Large weight-200 display headline split across two lines.
-       Lead sentence in muted warm gray below the headline.
-       Bottom meta bar: team and round/version info.
-       ══════════════════════════════════════════════════════════════════ -->
+
+
+
+
+
+
+
+
+
       <section class="slide slide--cover light">
-        <!-- Sidebar: research context above, date below -->
+
         <div class="slide-sidebar" data-anim="fade-in" data-delay="0">
           <span class="sidebar-label">Research Synthesis</span>
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Top-right deck label: title and date -->
+
         <div
           style="
             position: absolute;
@@ -1598,12 +1598,12 @@
         </div>
 
         <div class="cover-body">
-          <!-- Display headline: weight 200, two lines -->
+
           <h1 class="display" data-anim="fade-up" data-delay="2">
             User Research<br />Synthesis
           </h1>
 
-          <!-- Thin rule between headline and lead -->
+
           <div
             class="rule"
             data-anim="reveal-right"
@@ -1611,7 +1611,7 @@
             style="margin: 1.5vh 0"
           ></div>
 
-          <!-- Lead: weight 300, muted, max 55% width -->
+
           <p
             class="lead muted"
             data-anim="fade-up"
@@ -1623,33 +1623,33 @@
           </p>
         </div>
 
-        <!-- Bottom meta bar: team left, round right -->
+
         <div class="cover-meta" data-anim="fade-in" data-delay="5">
           <span class="label muted">Research Team · March 2026</span>
           <span class="label muted">Round 3 · Internal</span>
         </div>
       </section>
       <section class="slide slide--chapter dark">
-        <!-- Sidebar on dark: adapts automatically via .dark .sidebar-label -->
+
         <div class="slide-sidebar" data-anim="fade-in" data-delay="0">
           <span class="sidebar-label">Context</span>
           <span class="sidebar-label">Part One</span>
         </div>
 
-        <!-- Chapter number: small mono, monochrome accent -->
+
         <div class="chapter-num" data-anim="fade-in" data-delay="1">
           01 · Context
         </div>
 
-        <!-- Thin accent rule -->
+
         <div class="chapter-rule" data-anim="reveal-right" data-delay="2"></div>
 
-        <!-- Chapter headline: weight 200, very large -->
+
         <h2 class="h1" data-anim="fade-up" data-delay="3">
           Why we went back<br />to users
         </h2>
 
-        <!-- Short description: muted, capped at 50% width -->
+
         <p
           class="lead"
           style="
@@ -1665,27 +1665,27 @@
         </p>
       </section>
       <section class="slide slide--statement light">
-        <!-- Sidebar: three contextual labels -->
+
         <div class="slide-sidebar" data-anim="fade-in" data-delay="0">
           <span class="sidebar-label">March 2026</span>
           <span class="sidebar-label">Round 3</span>
           <span class="sidebar-label">Objective</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">Key Finding</span>
           <span class="label muted">03</span>
         </header>
 
-        <!-- Statement body: centered vertically -->
+
         <div class="statement-body">
-          <!-- Objective label in mono muted at top of content area -->
+
           <p class="kicker" data-anim="fade-in" data-delay="1">
             Primary objective · Round 3 synthesis
           </p>
 
-          <!-- The big claim: weight 200, sentence case, max 65% width -->
+
           <h2
             class="h1"
             data-anim="fade-up"
@@ -1696,7 +1696,7 @@
             they don't know what to do next.
           </h2>
 
-          <!-- Thin rule as a visual pause below the headline -->
+
           <div
             class="rule"
             data-anim="reveal-right"
@@ -1705,7 +1705,7 @@
           ></div>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -1717,15 +1717,15 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">User Behavior</span>
           <span class="label muted">04</span>
         </header>
 
-        <!-- Two-column body -->
+
         <div class="slide-body">
-          <!-- Left: text content -->
+
           <div class="split-text">
             <p class="kicker" data-anim="fade-in" data-delay="1">The Pattern</p>
             <h2 class="h2" data-anim="fade-up" data-delay="2">
@@ -1735,7 +1735,7 @@
               Users who complete three core actions in their first two days have
               a 4× higher 90-day retention rate. Most never get there.
             </p>
-            <!-- Small bullet list below the lead -->
+
             <ul
               class="bullet-list"
               style="margin-top: 0"
@@ -1748,7 +1748,7 @@
             </ul>
           </div>
 
-          <!-- Right: image with caption -->
+
           <div class="split-image" data-anim="fade-in" data-delay="3">
             <div class="img-placeholder">Image placeholder</div>
             <p class="img-caption">
@@ -1757,7 +1757,7 @@
           </div>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -1769,13 +1769,13 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">By the Numbers</span>
           <span class="label muted">05</span>
         </header>
 
-        <!-- Stats body: headline + three-col stat grid -->
+
         <div class="slide-body">
           <h2 class="h2" data-anim="fade-up" data-delay="1">
             What the data showed
@@ -1787,7 +1787,7 @@
             data-anim="fade-up"
             data-delay="2"
           >
-            <!-- Stat 1: churn rate -->
+
             <div class="stat-card">
               <div class="stat-value">68%</div>
               <p class="stat-label muted">
@@ -1796,7 +1796,7 @@
               <p class="stat-note">Amplitude · January 2026</p>
             </div>
 
-            <!-- Stat 2: time to abandonment -->
+
             <div class="stat-card">
               <div class="stat-value">3.2min</div>
               <p class="stat-label muted">
@@ -1805,7 +1805,7 @@
               <p class="stat-note">Session recordings · n=240</p>
             </div>
 
-            <!-- Stat 3: retention multiplier -->
+
             <div class="stat-card">
               <div class="stat-value">4×</div>
               <p class="stat-label muted">
@@ -1816,7 +1816,7 @@
           </div>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -1828,13 +1828,13 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">Recommendations</span>
           <span class="label muted">06</span>
         </header>
 
-        <!-- List body: left head + right bullets -->
+
         <div class="slide-body">
           <div class="list-head">
             <p class="kicker" data-anim="fade-in" data-delay="1">What to fix</p>
@@ -1847,7 +1847,7 @@
             </p>
           </div>
 
-          <!-- Five bullets: weight-300 lead size, em dash markers -->
+
           <ul class="bullet-list" data-anim="fade-up" data-delay="3">
             <li>Redesign the setup flow to three steps maximum</li>
             <li>Add a "start here" prompt on day one based on user type</li>
@@ -1861,7 +1861,7 @@
           </ul>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -1873,15 +1873,15 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">Current · Proposed</span>
           <span class="label muted">07</span>
         </header>
 
-        <!-- Two-panel body -->
+
         <div class="slide-body">
-          <!-- Left panel: current state -->
+
           <div class="compare-panel left" data-anim="fade-up" data-delay="1">
             <div class="compare-label">Current Onboarding</div>
             <h3 class="h3">9-step setup, any order</h3>
@@ -1895,7 +1895,7 @@
             </ul>
           </div>
 
-          <!-- Right panel: proposed state -->
+
           <div class="compare-panel right" data-anim="fade-up" data-delay="2">
             <div class="compare-label after">Proposed Flow</div>
             <h3 class="h3">3-step guided path, adaptive</h3>
@@ -1911,7 +1911,7 @@
           </div>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -1923,13 +1923,13 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Quote text: Lora italic, large, no decoration -->
+
         <p class="quote-text" data-anim="fade-up" data-delay="1">
           "I kept opening the app and then closing it again. I didn't know what
           I was supposed to do."
         </p>
 
-        <!-- Attribution: two lines of small mono -->
+
         <div class="quote-attr" data-anim="fade-in" data-delay="3">
           <span
             class="label"
@@ -1951,21 +1951,21 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Chrome header -->
+
         <header class="slide-chrome">
           <span class="label muted">Analysis</span>
           <span class="label muted">09</span>
         </header>
 
-        <!-- Dense headline -->
+
         <h2 class="dense-hl" data-anim="fade-up" data-delay="1">
           Why onboarding problems compound over time
         </h2>
 
-        <!-- Two-column analysis body -->
+
         <div class="slide-body">
           <div class="dense-cols" data-anim="fade-up" data-delay="2">
-            <!-- Left column: The Activation Trap -->
+
             <div class="dense-col">
               <h4>The Activation Trap</h4>
               <p>
@@ -1991,7 +1991,7 @@
               </p>
             </div>
 
-            <!-- Right column: The Network Effect Delay -->
+
             <div class="dense-col">
               <h4>The Network Effect Delay</h4>
               <p>
@@ -2017,7 +2017,7 @@
           </div>
         </div>
 
-        <!-- Footer -->
+
         <footer class="slide-foot">
           <span class="label muted">User Research Synthesis</span>
           <span class="label muted">Research Team</span>
@@ -2153,7 +2153,7 @@
           </h2>
 
           <div class="pie-row" data-anim="fade-up" data-delay="2">
-            <!-- Donut chart: conic-gradient with 4 segments -->
+
             <div
               class="pie-donut"
               style="
@@ -2168,7 +2168,7 @@
               "
             ></div>
 
-            <!-- Legend -->
+
             <div class="pie-legend">
               <div class="pie-item">
                 <div class="pie-swatch" style="background: var(--c-accent)"></div>
@@ -2241,7 +2241,7 @@
 
         <div class="slide-body">
           <div class="vtimeline" data-anim="fade-up" data-delay="2">
-            <!-- Row 1 -->
+
             <div class="vt-date">Week 1</div>
             <div class="vt-spine"></div>
             <div class="vt-content">
@@ -2251,7 +2251,7 @@
                 segments.
               </p>
             </div>
-            <!-- Row 2 -->
+
             <div class="vt-date">Week 2–3</div>
             <div class="vt-spine"></div>
             <div class="vt-content">
@@ -2261,7 +2261,7 @@
                 recorded and transcribed.
               </p>
             </div>
-            <!-- Row 3 -->
+
             <div class="vt-date">Week 4</div>
             <div class="vt-spine"></div>
             <div class="vt-content">
@@ -2271,7 +2271,7 @@
                 behaviour type.
               </p>
             </div>
-            <!-- Row 4 -->
+
             <div class="vt-date">Week 5</div>
             <div class="vt-spine"></div>
             <div class="vt-content">
@@ -2311,7 +2311,7 @@
           </h2>
 
           <div class="cycle-grid" data-anim="fade-up" data-delay="2">
-            <!-- Step 01: top-left -->
+
             <div class="cycle-step">
               <div class="cycle-num">01</div>
               <div class="cycle-title">Empathise</div>
@@ -2320,9 +2320,9 @@
                 Observe before interpreting.
               </p>
             </div>
-            <!-- Arrow right: top-center -->
+
             <div class="cycle-arrow">→</div>
-            <!-- Step 02: top-right -->
+
             <div class="cycle-step">
               <div class="cycle-num">02</div>
               <div class="cycle-title">Define</div>
@@ -2331,13 +2331,13 @@
                 Grounded in observation.
               </p>
             </div>
-            <!-- Arrow down-left: mid-left -->
+
             <div class="cycle-arrow">↓</div>
-            <!-- Center spacer: mid-center -->
+
             <div></div>
-            <!-- Arrow down-right: mid-right -->
+
             <div class="cycle-arrow">↓</div>
-            <!-- Step 04: bottom-left -->
+
             <div class="cycle-step">
               <div class="cycle-num">04</div>
               <div class="cycle-title">Test</div>
@@ -2346,9 +2346,9 @@
                 what they say.
               </p>
             </div>
-            <!-- Arrow left: bottom-center -->
+
             <div class="cycle-arrow">←</div>
-            <!-- Step 03: bottom-right -->
+
             <div class="cycle-step">
               <div class="cycle-num">03</div>
               <div class="cycle-title">Prototype</div>
@@ -2389,7 +2389,7 @@
             From raw observations to strategic insight
           </p>
 
-          <!-- Centered pyramid: narrowest at top, widest at bottom -->
+
           <div class="pyr-wrap" data-anim="fade-up" data-delay="4">
             <div class="pyr-level">Strategic Insight</div>
             <div class="pyr-level">Behavioral Patterns</div>
@@ -2410,10 +2410,10 @@
           <span class="sidebar-label">March 2026</span>
         </div>
 
-        <!-- Kicker: team attribution in muted mono -->
+
         <p class="kicker" data-anim="fade-in" data-delay="1">Research Team</p>
 
-        <!-- Thin rule -->
+
         <div
           class="rule"
           data-anim="reveal-right"
@@ -2421,7 +2421,7 @@
           style="margin: var(--gap-sm) 0"
         ></div>
 
-        <!-- Closing headline: weight 200, max 55% width -->
+
         <h2
           class="h1"
           data-anim="fade-up"
@@ -2431,7 +2431,7 @@
           Questions, feedback, and next steps
         </h2>
 
-        <!-- Contact lead: muted, links styled as plain text -->
+
         <p
           class="lead muted"
           data-anim="fade-up"
@@ -2443,12 +2443,12 @@
       </section>
 
     </div>
-    <!-- /#deck -->
 
-    <!-- Navigation dots: built dynamically by JS -->
+
+
     <nav id="nav-dots" aria-label="Slide navigation"></nav>
 
-    <!-- Slide counter: bottom-right, barely visible -->
+
     <div id="slide-counter"></div>
 
     <script>

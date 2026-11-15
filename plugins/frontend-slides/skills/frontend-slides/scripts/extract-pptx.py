@@ -23,7 +23,7 @@ def extract_pptx(file_path, output_dir="."):
     prs = Presentation(file_path)
     slides_data = []
 
-    # Create assets directory for extracted images
+
     assets_dir = os.path.join(output_dir, "assets")
     os.makedirs(assets_dir, exist_ok=True)
 
@@ -37,7 +37,7 @@ def extract_pptx(file_path, output_dir="."):
         }
 
         for shape in slide.shapes:
-            # Extract text content
+
             if shape.has_text_frame:
                 if shape == slide.shapes.title:
                     slide_data["title"] = shape.text
@@ -46,8 +46,8 @@ def extract_pptx(file_path, output_dir="."):
                         {"type": "text", "content": shape.text}
                     )
 
-            # Extract images
-            if shape.shape_type == 13:  # Picture type
+
+            if shape.shape_type == 13:
                 image = shape.image
                 image_bytes = image.blob
                 image_ext = image.ext
@@ -65,7 +65,7 @@ def extract_pptx(file_path, output_dir="."):
                     }
                 )
 
-        # Extract speaker notes
+
         if slide.has_notes_slide:
             notes_frame = slide.notes_slide.notes_text_frame
             slide_data["notes"] = notes_frame.text
@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
     slides = extract_pptx(input_file, output_dir)
 
-    # Write extracted data as JSON
+
     output_path = os.path.join(output_dir, "extracted-slides.json")
     with open(output_path, "w") as f:
         json.dump(slides, f, indent=2)

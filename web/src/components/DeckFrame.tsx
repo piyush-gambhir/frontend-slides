@@ -1,19 +1,19 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-/**
- * Renders a template deck in an iframe that ALWAYS fits a 16:9 box, at any size.
- *
- * The decks are built for a full 1920×1080 presentation viewport; in a small
- * iframe they don't scale down — they crop. So we render the iframe at its true
- * 1920×1080 design size (where it looks right) and uniformly shrink the whole
- * thing with `transform: scale(factor)`.
- *
- * `factor` has to be a unitless number, so it's measured from the container
- * width (one-time on mount + on window resize, with ResizeObserver as a bonus
- * when available). We avoid depending on observers alone because they don't fire
- * reliably in every embedded context.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 const DESIGN_W = 1920;
 const DESIGN_H = 1080;
 
@@ -33,8 +33,8 @@ export default function DeckFrame({
   const [scale, setScale] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  // When the deck iframe has focus it swallows keystrokes, so Escape never
-  // reaches the parent dialog. Listen inside the (same-origin) iframe too.
+
+
   const handleLoad = () => {
     setLoaded(true);
     if (interactive && onEscape) {
@@ -43,7 +43,7 @@ export default function DeckFrame({
           if (e.key === 'Escape') onEscape();
         });
       } catch {
-        /* cross-origin or detached — ignore */
+
       }
     }
   };
